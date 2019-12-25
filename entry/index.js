@@ -39,7 +39,6 @@ module.exports = function (args) {
                     priter.error('扫描出 错误:' + arrErr[1] + ' warings:' + arrWaring[1]);
                 priter.tip('静态代码规范检测未通过');
 
-                process.exit(1);
 
             });
 

@@ -50,6 +50,7 @@ module.exports = function (args) {
 
     const nyc = findCommand(__dirname, 'nyc');
     const mocha = findCommand(__dirname, 'mocha');
+    console.log(__dirname, mocha, nyc);
 
     return async function (next) {
         priter.info('正在进行单元测试>>>>>>>>>>>>>');

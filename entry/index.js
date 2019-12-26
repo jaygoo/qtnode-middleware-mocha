@@ -53,9 +53,23 @@ module.exports = function (args) {
     console.log(__dirname, mocha, nyc);
 
     return async function (next) {
+        priter.info('安装相关依赖>>>>>>>>>>>>>');
+        let cmd = 'cnpm i istanbul@1.0.0-alpha.2 mocha@5.0.1 nyc@11.4.1 mochawesome@3.0.2 chai@4.1.2 -D ';
+        await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})
+            .then((data) => {
+                priter.data(data);
+
+                priter.tip('依赖安装成功');
+            })
+            .catch((data)=>{
+                priter.data(data);
+
+                priter.warn('依赖安装失败');
+            });
+
         priter.info('正在进行单元测试>>>>>>>>>>>>>');
 
-        let cmd = `${nyc} ${mocha} --require babel-core/register --recursive --reporter spec --bail 
+         cmd = `${nyc} ${mocha} --require babel-core/register --recursive --reporter spec --bail 
          ${path.resolve(process.cwd(), './test/**/*.test.js')}`;
 
         await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})

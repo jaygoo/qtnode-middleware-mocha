@@ -77,23 +77,27 @@ module.exports = function (args) {
                 priter.data('then', data);
                 let arrErr = data.match(/\d+(?= passing)/);
                 let arrWaring = data.match(/\d+(?= failing)/);
-                if(arrErr != null && arrErr != null) {
+
+                arrErr = arrErr || [0];
+                arrWaring = arrWaring || [0];
+                if(arrWaring[0] > null) {
                     priter.warn('单元测试未通过！  passing:' + arrErr[0] + '  failing:' + arrWaring[0]);
                     process.exit(1);
                 }
-                priter.tip('单元测试通过');
+                priter.tip('单元测试通过   passing:' + arrErr[0] + '  failing:' + arrWaring[0] );
             })
             .catch((data)=>{
                 data = data || '';
-                priter.data('catch', data);
+                priter.data('catch.', data);
                 let arrErr = data.match(/\d+(?= passing)/);
                 let arrWaring = data.match(/\d+(?= failing)/);
-                console.log(arrErr, arrWaring);
-                if(arrErr != null && arrErr != null) {
+                arrErr = arrErr || [0];
+                arrWaring = arrWaring || [0];
+                if(arrWaring[0] > null) {
                     priter.warn('单元测试未通过！  passing:' + arrErr[0] + '  failing:' + arrWaring[0]);
                     process.exit(1);
                 }
-                priter.tip('单元测试通过');
+                priter.tip('单元测试通过   passing:' + arrErr[0] + '  failing:' + arrWaring[0] );
             });
 
         next();

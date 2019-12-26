@@ -74,7 +74,7 @@ module.exports = function (args) {
 
         await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})
             .then((data) => {
-                priter.data(data);
+                priter.data('then', data);
                 let arrErr = data.match(/\d+(?= passing)/);
                 let arrWaring = data.match(/\d+(?= failing)/);
                 if(arrErr != null && arrErr != null) {
@@ -84,7 +84,8 @@ module.exports = function (args) {
                 priter.tip('单元测试通过');
             })
             .catch((data)=>{
-                priter.data(data);
+                data = data || '';
+                priter.data('catch', data);
                 let arrErr = data.match(/\d+(?= passing)/);
                 let arrWaring = data.match(/\d+(?= failing)/);
                 if(arrErr != null && arrErr != null) {

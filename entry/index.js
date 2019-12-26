@@ -69,8 +69,8 @@ module.exports = function (args) {
         priter.info('正在进行单元测试>>>>>>>>>>>>>');
 
 
-        cmd = `${nyc} --reporter=lcov --reporter=text-summary --reporter=text  
-        ${mocha} --require babel-core/register --recursive --reporter=spec  --bail  ./test/**/*.test.js`;
+        cmd = `${nyc} --reporter=lcov --reporter=text-summary --reporter=text  ${mocha}` ;
+        cmd += ' --require babel-core/register --recursive --reporter=spec  --bail  ./test/**/*.test.js';
 
         await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})
             .then((data) => {

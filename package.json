@@ -1,6 +1,6 @@
 {
   "name": "qtnode-middleware-mocha",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "mocha单元测试中间件",
   "main": "dist/index.js",
   "bin": {},
@@ -16,9 +16,7 @@
   "homepage": "https://github.com/jaygoo/qtnode-middleware-mocha/blob/master/README.MD",
   "keywords": [],
   "license": "ISC",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",

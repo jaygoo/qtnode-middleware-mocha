@@ -1,9 +1,8 @@
 'use strict';
 
 const priter= require('qtnode-middleware-console');
-const childProcess = require('./utils/childProcess');
 const path = require('path');
-const { spawn, exec } = require('child_process');
+const { exec } = require('child_process');
 
 const fs = require('fs');
 
@@ -50,7 +49,7 @@ module.exports = function (args) {
 
     const nyc = findCommand(__dirname, 'nyc');
     const mocha = findCommand(__dirname, 'mocha');
-    console.log(__dirname, mocha, nyc);
+    // console.log(__dirname, mocha, nyc);
 
     return async function (next) {
         priter.info('安装相关依赖>>>>>>>>>>>>>');
@@ -69,8 +68,9 @@ module.exports = function (args) {
 
         priter.info('正在进行单元测试>>>>>>>>>>>>>');
 
-         cmd = `${nyc} ${mocha} --require babel-core/register --recursive --reporter spec --bail  ./test/**/*.test.js`;
 
+        cmd = `${nyc} --reporter=lcov --reporter=text-summary --reporter=text  
+        ${mocha} --require babel-core/register --recursive --reporter=spec  --bail  ./test/**/*.test.js`;
 
         await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})
             .then((data) => {

@@ -1,6 +1,6 @@
 {
   "name": "qtnode-middleware-mocha",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "mocha单元测试中间件",
   "main": "dist/index.js",
   "bin": {},

@@ -88,6 +88,7 @@ module.exports = function (args) {
                 priter.data('catch', data);
                 let arrErr = data.match(/\d+(?= passing)/);
                 let arrWaring = data.match(/\d+(?= failing)/);
+                console.log(arrErr, arrWaring);
                 if(arrErr != null && arrErr != null) {
                     priter.warn('单元测试未通过！  passing:' + arrErr[0] + '  failing:' + arrWaring[0]);
                     process.exit(1);

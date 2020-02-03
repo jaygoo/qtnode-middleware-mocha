@@ -45,15 +45,16 @@ let execPromise = function (cmd, opts) {
 };
 
 module.exports = function (args) {
-    Object.assign({}, args);
-
+    const options = Object.assign({}, args);
+    const context = options.context;
+    const lanague = !!!context.config ? 'js' : (!!!(lanague in context.config) ? context.config['lanague'] : 'js');
+    console.log(context, lanague);
     const nyc = findCommand(__dirname, 'nyc');
     const mocha = findCommand(__dirname, 'mocha');
-    // console.log(__dirname, mocha, nyc);
 
     return async function (next) {
         priter.info('安装相关依赖>>>>>>>>>>>>>');
-        let cmd = 'cnpm i istanbul@1.0.0-alpha.2 mocha@5.0.1 nyc@11.4.1 mochawesome@3.0.2 chai@4.1.2 -D ';
+        let cmd = 'cnpm i istanbul@1.0.0-alpha.2 mocha@5.0.1 nyc@11.4.1 mochawesome@3.0.2 chai@4.1.2  ts-node -D ';
         await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})
             .then((data) => {
                 priter.data(data);
@@ -70,7 +71,16 @@ module.exports = function (args) {
 
 
         cmd = `${nyc} --reporter=lcov --reporter=text-summary --reporter=text  ${mocha}` ;
-        cmd += ' --require babel-core/register --recursive --reporter=spec  --bail  ./test/**/*.test.js';
+        if (lanague == 'ts') {
+            cmd += ' --require ts-node/register --recursive ' +
+                ' --reporter=spec --extension ts --bail  ./test/**/*.test.tss';
+        } else {
+            cmd += ' --require babel-core/register --recursive ' +
+                ' --reporter=spec --extension js --bail  ./test/**/*.test.js';
+        }
+
+
+        //ts-node/register  "src/**/*.spec.ts"
 
         await execPromise(cmd, {encoding: 'utf8', cwd: process.cwd()})
             .then((data) => {

@@ -22,3 +22,7 @@ publish:
       - dn test
       - dn build
       - npm pu
+
+
+config:
+  - lanague: ts

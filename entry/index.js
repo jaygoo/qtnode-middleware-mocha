@@ -49,7 +49,7 @@ module.exports = function (args) {
     const options = Object.assign({}, args);
     const context = options.context;
     const pipeConfig = context.pipeConfig;
-    console.log('--**--', context, '--**--');
+    console.log('--**s--', pipeConfig, '--**s--');
 
     const lanague = !!!pipeConfig.config ? 'js' :
         (!!!(lanague in pipeConfig.config) ? pipeConfig.config['lanague'] : 'js');

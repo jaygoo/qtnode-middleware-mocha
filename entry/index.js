@@ -48,9 +48,11 @@ module.exports = function (args) {
     console.log('----', args, '----');
     const options = Object.assign({}, args);
     const context = options.context;
+    const pipeConfig = context.pipeConfig;
     console.log('--**--', context, '--**--');
 
-    const lanague = !!!context.config ? 'js' : (!!!(lanague in context.config) ? context.config['lanague'] : 'js');
+    const lanague = !!!pipeConfig.config ? 'js' :
+        (!!!(lanague in pipeConfig.config) ? pipeConfig.config['lanague'] : 'js');
     console.log(context, lanague);
     const nyc = findCommand(__dirname, 'nyc');
     const mocha = findCommand(__dirname, 'mocha');

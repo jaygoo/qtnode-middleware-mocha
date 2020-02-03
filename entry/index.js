@@ -45,8 +45,11 @@ let execPromise = function (cmd, opts) {
 };
 
 module.exports = function (args) {
+    console.log('----', args, '----');
     const options = Object.assign({}, args);
     const context = options.context;
+    console.log('--**--', context, '--**--');
+
     const lanague = !!!context.config ? 'js' : (!!!(lanague in context.config) ? context.config['lanague'] : 'js');
     console.log(context, lanague);
     const nyc = findCommand(__dirname, 'nyc');
